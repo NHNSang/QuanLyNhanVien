@@ -187,7 +187,7 @@
 				<!-- Modal body -->
 				<div class="modal-body">
 
-					<form role="form">
+					<form id="formRander" role="form">
 
 						<div class="form-group">
 							<div class="input-group">
@@ -263,10 +263,10 @@
 									<span class="input-group-text"><i class="fa fa-briefcase"></i></span>
 								</div>
 								<select class="form-control" id="chucvu">
-									<option>Chọn chức vụ</option>
-									<option>Sếp</option>
-									<option>Trưởng phòng</option>
-									<option>Nhân viên</option>
+									<option id="value">Chọn chức vụ</option>
+									<option id="sep">Sếp</option>
+									<option id="truongPhong">Trưởng phòng</option>
+									<option id="nhanVien">Nhân viên</option>
 								</select>
 							</div>
 
@@ -328,6 +328,7 @@
 
 	<!-- my js -->
 	<script src="./model/NhanVien.js"></script>
+	<script src="./validation/validation.js"></script>
 	<script src="./index.js"></script>
 </body>
 

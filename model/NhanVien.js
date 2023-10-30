@@ -1,4 +1,4 @@
-// --------Tạo lớp đối tượng nhân viên --------
+// Tạo lớp đối tượng nhân viên
 function NhanVien(){
     this.tknv = '';
     this.name = '';
@@ -8,4 +8,6 @@ function NhanVien(){
     this.luongCB = '';
     this.chucvu = '';
     this.gioLam = '';
+
+
 }
