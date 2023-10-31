@@ -28,8 +28,6 @@ var arrNhanVien = [];
 
 // -----Tạo hàm lấy dữ liệU từ input------
 function getValueUser(){
-    // ko cho trang reload lại
-    event.preventDefault()
 
     // Tạo biến nhanVien
     var nhanVien = new NhanVien();
@@ -67,18 +65,29 @@ function getValueUser(){
     console.log(nhanVien)
 
     if(isValid){
-        // Đẩy lên giao diện
-        arrNhanVien.push(nhanVien);
-        saveLocalStore("arrNhanVien",arrNhanVien);
-        randerDispaly();
-
-        // reset input
-        document.getElementById("formRander").reset();
+        return nhanVien;
     }
 
 }
 
-// -----Tạo hàm rander dữ liệ------
+// -----Tạo hàm addUser-----
+function addUser(){
+    var nhanVien = getValueUser();
+    // ko cho trang reload lại
+    event.preventDefault()
+
+    if(nhanVien){
+    // Đẩy lên giao diện
+    arrNhanVien.push(nhanVien);
+    saveLocalStore("arrNhanVien",arrNhanVien);
+    randerDispaly();
+
+    // reset input
+    document.getElementById("formRander").reset();
+    }
+}
+
+// -----Tạo hàm rander dữ liệu------
 function randerDispaly(arr){
     if(!arr){
         arr = arrNhanVien
@@ -101,7 +110,7 @@ function randerDispaly(arr){
             <td>${nhanVien.xepLoaiNhanVien()}</td>
             <td>
                 <button onclick="deleteUser('${nhanVien.tknv}')" class="btn btn-danger">Xoá</button>
-                <button class="btn btn-dark">Sửa</button>
+                <button onclick="getInfoUser('${nhanVien.tknv}')" class="btn btn-dark">Sửa</button>
             </td>
         </tr>
         `
@@ -109,9 +118,9 @@ function randerDispaly(arr){
     document.getElementById("tableDanhSach").innerHTML = content;
 }
 
-document.getElementById("btnThemNV").onclick = getValueUser;
+document.getElementById("btnThemNV").onclick = addUser;
 
-// -----Tạo hàm delete dữ liệ------
+// -----Tạo hàm delete dữ liệu------
 function deleteUser(maNv){
     var index = -1
     for(var i = 0; i < arrNhanVien.length ; i++){
@@ -126,6 +135,39 @@ function deleteUser(maNv){
         randerDispaly()
     }
 }
+// -----Tạo hàm edit dữ liệu------
+// Lấy dữ liệu
+function getInfoUser(maNv){
+    var nhanVien = {};
+    // Lấy dữ liệu
+    for(var i = 0; i < arrNhanVien.length ; i++){
+        if(arrNhanVien[i].tknv == maNv){
+            nhanVien = arrNhanVien[i];
+        }
+    }
+    for(var z = 0; z < arrIdInput.length; z++){
+        document.getElementById(arrIdInput[z]).value = nhanVien[arrIdInput[z]];
+        if(arrIdInput == 'tknv'){
+            document.getElementById(arrIdInput[z]).readOnly = true; 
+        }
+    }
+}
+// edit dữ liệu
+function editValueUser(){
+    var nhanVien = getValueUser();
+    var index = -1;
+    for(var i = 0; i < arrNhanVien.length; i++){
+        if(nhanVien.tknv == arrNhanVien[i].tknv){
+            index = i
+        }
+    }
+    document.getElementById('tknv').readOnly = false;
+    document.getElementById('formRander').reset();
+    arrNhanVien[index] = nhanVien;
+    saveLocalStore("arrNhanVien",arrNhanVien);
+    randerDispaly();
+}
+document.getElementById("btnCapNhat").onclick = editValueUser;
 
 // -----Tạo localStorage------
 // Tạo hàm đưa lưu dữ liệu
