@@ -54,9 +54,12 @@ function getValueUser(){
         else if(arrIdInput[i] == "password"){
             isValid &= checkEmptyValue(valueIdInput,arrIdSpan[i]) && checkMinMaxVulua(valueIdInput,arrIdSpan[i],6,10);
         }
-        // else if(arrIdInput[i] == "luongCB"){
-        //     isValid &= checkEmptyValue(valueIdInput,arrIdSpan[i]) && checkLuongMinMaxVulua(valueIdInput,arrIdSpan[i],1000000,20000000);
-        // }
+        else if(arrIdInput[i] == "luongCB"){
+            isValid &= checkEmptyValue(valueIdInput,arrIdSpan[i]) && checkLuongMinMaxVulua(valueIdInput,arrIdSpan[i],1000000,20000000);
+        }
+        else if(arrIdInput[i] == "gioLam"){
+            isValid &= checkEmptyValue(valueIdInput,arrIdSpan[i]) && checkGioLam(valueIdInput,arrIdSpan[i],80,200);
+        }
         else{
             isValid &= checkEmptyValue(valueIdInput,arrIdSpan[i])
         }
@@ -85,19 +88,21 @@ function randerDispaly(arr){
     for(var z = 0; z<arr.length ; z++){
         var nhanVien = new NhanVien();
         var valueNhanVien = arr[z];
+        // Dùng object để ra kết qua phương thức
         Object.assign(nhanVien,valueNhanVien);
         content += `
         <tr>
-        <td>${nhanVien.tknv}</td>
-        <td>${nhanVien.name}</td>
-        <td>${nhanVien.email}</td>
-        <td>${nhanVien.datepicker}</td>
-        <td>${nhanVien.chucvu}<td>              
-        <td></td>              
-        <td>
-            <button onclick="deleteUser('${nhanVien.tknv}')" class="btn btn-danger">Xoá</button>
-            <button class="btn btn-dark">Sửa</button>
-        </td>
+            <td>${nhanVien.tknv}</td>
+            <td>${nhanVien.name}</td>
+            <td>${nhanVien.email}</td>
+            <td>${nhanVien.datepicker}</td>
+            <td>${nhanVien.chucvu}</td>              
+            <td>${nhanVien.tinhTongLuong().toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}</td>
+            <td>${nhanVien.xepLoaiNhanVien()}</td>
+            <td>
+                <button onclick="deleteUser('${nhanVien.tknv}')" class="btn btn-danger">Xoá</button>
+                <button class="btn btn-dark">Sửa</button>
+            </td>
         </tr>
         `
     }
