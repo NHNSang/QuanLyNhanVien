@@ -26,7 +26,6 @@ var arrIdSpan = [
 var arrNhanVien = [];
 
 // Tạo mãng lưu trữ từng nhân viên
-var arrUser = [];
 
 // -----Tạo hàm lấy dữ liệU từ input------
 function getValueUser(){
@@ -179,15 +178,15 @@ function searchDataUser(event){
     var newKeyWord = removeVietnameseTones(keyword.toLowerCase().trim());
     console.log(newKeyWord);
 
-    var arrFiled = [];
-    for(var i = 0 ; i < arrUser.length ; i++){
-        var tenNhanVien = removeVietnameseTones(addUser[i].name.toLowerCase().trim());
+    var arrSearchNhanVien = [];
+    for(var i = 0 ; i < arrNhanVien.length ; i++){
+        var tenNhanVien = removeVietnameseTones(arrNhanVien[i].name.toLowerCase().trim());
         if(tenNhanVien.includes(newKeyWord)){
-            arrFiled.push(addUser[i]);
+            arrSearchNhanVien.push(arrNhanVien[i]);
         }
     }
-    console.log(arrFiled)
-    randerDispaly(arrFiled)
+    console.log(arrSearchNhanVien)
+    randerDispaly(arrSearchNhanVien)
 }
 
 
