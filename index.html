@@ -124,7 +124,7 @@
 						<div class="row mb-3">
 							<div class="col">
 								<div class="input-group">
-									<input type="text" class="form-control" placeholder="Loại nhân viên" id="searchName">
+									<input oninput="searchDataUser(event)" type="text" class="form-control" placeholder="Loại nhân viên" id="searchName">
 									<div class="input-group-prepend">
 										<span class="input-group-text" id="btnTimNV"><i class="fa fa-search"></i></span>
 									</div>
@@ -329,6 +329,7 @@
 	<!-- my js -->
 	<script src="./model/NhanVien.js"></script>
 	<script src="./validation/validation.js"></script>
+	<script src="./util/util.js"></script>
 	<script src="./index.js"></script>
 </body>
 

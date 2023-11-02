@@ -21,28 +21,31 @@ var arrIdSpan = [
     'tbChucVu',
     'tbGiolam',
 ];
-console.log(arrIdSpan)
+
 // Tạo mãng lưu nhân viên
 var arrNhanVien = [];
 
+// Tạo mãng lưu trữ từng nhân viên
+var arrUser = [];
 
 // -----Tạo hàm lấy dữ liệU từ input------
 function getValueUser(){
 
     // Tạo biến nhanVien
     var nhanVien = new NhanVien();
-
+    
+    
     // Tạo biến để kiểm tra validation
     var isValid  = true;
 
     // Đưa dữ liệu lên
     for(var i = 0 ; i < arrIdInput.length ; i++){
         var valueIdInput= document.getElementById(arrIdInput[i]).value;
-
+        
 
         // Lưu trữ dữ liệU
         nhanVien[arrIdInput[i]] = valueIdInput;
-
+        
 
 
         // Thông báo validation
@@ -63,6 +66,7 @@ function getValueUser(){
         }
     }
     console.log(nhanVien)
+    
 
     if(isValid){
         return nhanVien;
@@ -73,9 +77,9 @@ function getValueUser(){
 // -----Tạo hàm addUser-----
 function addUser(){
     var nhanVien = getValueUser();
+    
     // ko cho trang reload lại
     event.preventDefault()
-
     if(nhanVien){
     // Đẩy lên giao diện
     arrNhanVien.push(nhanVien);
@@ -169,7 +173,36 @@ function editValueUser(){
 }
 document.getElementById("btnCapNhat").onclick = editValueUser;
 
-// -----Tạo localStorage------
+// -----Tạo tìm kiếm------
+function searchDataUser(event){
+    var keyword = event.target.value;
+    var newKeyWord = removeVietnameseTones(keyword.toLowerCase().trim());
+    console.log(newKeyWord);
+
+    var arrFiled = [];
+    for(var i = 0 ; i < arrUser.length ; i++){
+        var tenNhanVien = removeVietnameseTones(addUser[i].name.toLowerCase().trim());
+        if(tenNhanVien.includes(newKeyWord)){
+            arrFiled.push(addUser[i]);
+        }
+    }
+    console.log(arrFiled)
+    randerDispaly(arrFiled)
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+// -----Tạo localStorage và lưu trữ------
 // Tạo hàm đưa lưu dữ liệu
 function saveLocalStore(key,value){
     // Chuyển dữ liệu về JSON
